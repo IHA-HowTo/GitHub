@@ -1,0 +1,10 @@
+\beamer@endinputifotherversion {3.33pt}
+\select@language {english}
+\beamer@sectionintoc {1}{What is GitHub and what can it do?}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Example}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Merge}{9}{0}{1}
+\beamer@sectionintoc {2}{How to get started}{10}{0}{2}
+\beamer@subsectionintoc {2}{1}{Create a GitHub account}{11}{0}{2}
+\beamer@subsectionintoc {2}{2}{Download and install SmartGit}{12}{0}{2}
+\beamer@subsectionintoc {2}{3}{Setup SmartGit with GitHub.}{13}{0}{2}
+\beamer@sectionintoc {3}{Live demo}{15}{0}{3}
