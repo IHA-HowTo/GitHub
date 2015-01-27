@@ -1,36 +1,50 @@
 
-% additional usepackage{beamerthemeshadow} is used
 \documentclass{beamer}
-%\usepackage{beamerthemeshadow}
+\setbeamertemplate{navigation symbols}{}
 
-\usepackage{lmodern} % Font
-\usepackage[T1]{fontenc} % Can use danish characters
-\usepackage[utf8]{inputenc} %input encoding. Can be used on Linux, Mac and Windows         
-\usepackage[english]{babel} %Split words accoding to English
+\usepackage{theme/test}
+\setLogo{theme/AU-logo}
 
-\input{../Modules/Modules/FigureSetup}
-\input{../Modules/Modules/URLSetup}
+\title{Version Control and GitHub}
+\subtitle{How to do stuff}
+
+\author{Rasmus Bækgaard}
+\setTitle{Computer Engineer Student}
+\setMail{10893@iha.dk}
+
+\setSection{Section of Electrical and Computer Engineering}
+\setDepartment{Department of Engineering}
+\institute{Aarhus University}
+\date{\today}
+
+\setFootnote{Electrical and Computer Engineering}
+
+\graphicspath{{Figures/} }
+
+\newcommand{\framedgraphic}[2][0.8]{
+    \begin{figure}[hbtp]
+        \centering
+            \includegraphics[width=\textwidth,height=#1\textheight,keepaspectratio]{#2}
+    \end{figure}
+
+}
 
 \begin{document}
-
-\title{Version control and GitHub}  
-\author{Rasmus Bækgaard}
-\date{\today} 
 
 \frame{
 	\titlepage
 	
-	\begin{figure}[hbtp]
-	\centering
-	\includegraphics[width=0.48\textwidth]{Octocat.png}
-	\end{figure}
+	% \begin{figure}[hbtp]
+	% \centering
+	% \includegraphics[width=0.48\textwidth]{Octocat}
+	% \end{figure}
 } 
 
 \frame{\frametitle{Table of contents}\tableofcontents} 
 
 
 
-\section{What is GitHub and what can it do?}
+\section{Version Control}
 \frame
 {
 	\frametitle{What is GitHub and what can it do?}
@@ -51,13 +65,13 @@ the world.
 
 }
 
-\subsection{Example}
+
 \frame{ 
 	\frametitle{Why do you want to use it?}
 
 	\begin{figure}[hbtp]
 		\centering
-		\includegraphics[width=0.9\textwidth]{VCS1}
+		\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{VCS1}
 	\end{figure}
 
 }
@@ -103,7 +117,7 @@ the world.
 }
 
 
-\subsection{Merge}
+% \subsection{Merge}
 \frame{ 
 	\frametitle{Merge}
 When conflicts occur they must be solved one way or another.
@@ -117,7 +131,7 @@ This is taking what was in the original file, the modified, compare them and bri
 }
 
 
-\section{How to get started}
+\section{GitHub}
 
 \frame{
 	\frametitle{How to get started}	
@@ -132,7 +146,6 @@ To get setup and running we will need the following:
 \end{itemize}
 }
 
-\subsection{Create a GitHub account}
 \frame{
 \frametitle{Create a GitHub account}	
 
@@ -148,7 +161,6 @@ To get setup and running we will need the following:
 	
 }
 
-\subsection{Download and install SmartGit}
 
 \frame{
 \frametitle{Download and install SmartGit}
@@ -159,7 +171,6 @@ To get setup and running we will need the following:
 \end{itemize}	
 }
 
-\subsection{Setup SmartGit with GitHub.}
 
 \frame{
 	\frametitle{Setup SmartGit with GitHub.}
@@ -195,7 +206,7 @@ To get setup and running we will need the following:
 		
 }
 
-\section{Setup a Repository (single project)}
+\section{Setup a Repository with collaborators}
 \frame{
 	\frametitle{Setup a Repository (single project)}
 	
@@ -204,10 +215,7 @@ To get setup and running we will need the following:
 		\item Select \texttt{+New Repository}
 	\end{itemize}		
 	
-	\begin{figure}[hbtp]
-		\centering
-		\includegraphics[width=0.95\textwidth]{Repo1}
-	\end{figure}
+	\framedgraphic[0.75]{Repo1}
 }
 		
 		
@@ -219,10 +227,7 @@ To get setup and running we will need the following:
 		\item (Optional) Add a .gitignore (more of this later).
 	\end{itemize}		
 	
-	\begin{figure}[hbtp]
-		\centering
-		\includegraphics[width=0.95\textwidth]{Repo2}
-	\end{figure}
+	\framedgraphic[0.75]{Repo2}
 }
 
 \frame{
@@ -230,14 +235,11 @@ To get setup and running we will need the following:
 	
 	There you go -- no so hard.		
 	
-	\begin{figure}[hbtp]
-		\centering
-		\includegraphics[width=0.95\textwidth]{Repo3}
-	\end{figure}
+	\framedgraphic{Repo3}
 }
 
 
-\section{Add collaborators (single project)}
+
 \frame{
 	\frametitle{Add collaborators (single project)}
 	
@@ -248,10 +250,7 @@ To get setup and running we will need the following:
 		\item Enter a username
 	\end{itemize}		
 	
-	\begin{figure}[hbtp]
-		\centering
-		\includegraphics[width=0.85\textwidth]{Add1}
-	\end{figure}
+	\framedgraphic[0.6]{Add1}
 }
 
 \section{Setup a Repository (multiple projects)}
@@ -265,10 +264,7 @@ To get setup and running we will need the following:
 		\texttt{Create organization}.
 	\end{itemize}		
 	
-	\begin{figure}[hbtp]
-		\centering
-		\includegraphics[width=0.95\textwidth]{Org1}
-	\end{figure}
+	\framedgraphic[0.6]{Org1}
 }
 
 \frame{
@@ -278,10 +274,7 @@ To get setup and running we will need the following:
 		\item Select a name and give your mail-address.
 	\end{itemize}		
 	
-	\begin{figure}[hbtp]
-		\centering
-		\includegraphics[width=0.65\textwidth]{Org2}
-	\end{figure}
+	\framedgraphic[0.7]{Org2}
 }
 
 \frame{
@@ -291,13 +284,10 @@ To get setup and running we will need the following:
 		\item Invite members (can be done later as well).
 	\end{itemize}		
 	
-	\begin{figure}[hbtp]
-		\centering
-		\includegraphics[width=0.95\textwidth]{Org3}
-	\end{figure}
+	\framedgraphic[0.75]{Org3}
 }
 
-\subsection{Invite members to organization}
+% \subsection{Invite members to organization}
 \frame{
 	\frametitle{Setup a Repository (multiple projects)}
 	

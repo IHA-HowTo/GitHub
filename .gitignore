@@ -1,4 +1,6 @@
 ####### Latex ####### 
+*.nav
+*.snm
 *.aux
 *.glo
 *.idx

@@ -1,0 +1,225 @@
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+
+\NeedsTeXFormat{LaTeX2e}
+%\ProvidesPackage{theme/test}[2010/02/06 ZBH beamer theme] %Set only if this is to be installed in the Latex installation folder
+\RequirePackage{ifthen}
+\RequirePackage[scaled=.85]{helvet}
+
+\RequirePackage[danish,english]{babel}
+\main@language{english}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc} 	% Can use danish characters
+\RequirePackage{lmodern}
+\setcounter{tocdepth}{1}
+
+
+%----------------------------------------------------------
+% Various booleans (true/false settings) and variables
+%----------------------------------------------------------
+\def\backgroundfile{}
+\def\department{}
+\def\instSection{}
+\def\authorTitle{}
+\def\authorMail{}
+\def\footNote{}
+
+\newboolean{@usedanish}
+\setboolean{@usedanish}{false}
+
+\newboolean{@use1610}
+\setboolean{@use1610}{false}
+
+\newboolean{@use169}
+\setboolean{@use169}{false}
+
+\newboolean{@useLogo}
+\setboolean{@useLogo}{false}
+
+\newlength{\@headerdist}
+\setlength{\@headerdist}{5mm}
+
+
+%----------------------------------------------------------
+%				 Declare options
+% These goes \documenctclass[here,here,andHere]{beamer}
+%
+% Options Available:
+%
+% - danish
+% 	Will set the language to danish with english as second
+%
+% - 169
+%	Will set the frame size to 16:9 aspect.
+%	Will not work with 1610
+%
+% - 1610
+%	Will set the frame size to 16:10 aspect.
+%	Will not work with 169
+%----------------------------------------------------------
+
+\DeclareOption{danish}{
+	\setboolean{@usedanish}{true}
+}
+
+\DeclareOption{1610}{
+	\setboolean{@use1610}{true}
+}
+
+\DeclareOption{169}{
+	\setboolean{@use169}{true}
+}
+
+\newcommand{\setLogo}[1]{
+	\setboolean{@useLogo}{true}
+	\def\backgroundfile{#1}
+}
+
+\newcommand{\setDepartment}[1]{
+	\def\department{#1}
+}
+
+\newcommand{\setTitle}[1]{
+	\def\authorTitle{#1}
+}
+
+\newcommand{\setMail}[1]{
+	\def\authorMail{#1}
+}
+
+\newcommand{\setSection}[1]{
+	\def\instSection{#1}
+}
+
+\newcommand{\setFootnote}[1]{
+	\def\footNote{#1}
+}
+
+\ProcessOptions
+
+%----------------------------------------------------------
+% Select language based on options
+% Will choose English if Danish is not specified
+% See section 'Declare options'
+%----------------------------------------------------------
+\ifthenelse{\boolean{@usedanish}}{
+	\RequirePackage[english,danish]{babel}
+	\main@language{danish}
+}
+
+% set slides to 16:10 aspect
+\ifthenelse{\boolean{@use1610}}{
+	\RequirePackage[orientation=landscape,size=custom,width=16,height=10,scale=0.5]{beamerposter} 
+}{}
+
+% set slides to 16:9 aspect
+% Warning on both 1610 and 169
+\ifthenelse{\boolean{@use169}}{
+	
+	\RequirePackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5]{beamerposter} 
+
+	\ifthenelse{\boolean{@use1610}}{
+	 \PackageError{'Custom Theme'}{Options '1610' and '169' are mutually exclusive.}{}%
+	} { }
+}
+
+\mode<presentation>
+
+%----------------------------------------------------------
+% Set fonts and size
+%----------------------------------------------------------
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{date}{size=\large}
+\setbeamerfont{example text}{series=\bfseries}
+\setbeamerfont{section}{series=\bfseries}
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
+\setbeamerfont{framesubtitle}{series=\bfseries,size=\small}
+\setbeamerfont{structure}{series=\bfseries,size=\small}
+
+%----------------------------------------------------------
+% Set colors
+% Official AU colors: http://medarbejdere.au.dk/administration/kommunikation/design/omdesignet/farver/
+%----------------------------------------------------------
+\definecolor{AUblue}{cmyk}{1,0.8,0,0.15} 
+\setbeamercolor{structure}{fg=AUblue}
+\setbeamercolor{frametitle}{fg=AUblue}
+\setbeamercolor{title}{fg=AUblue}
+\setbeamercolor{item}{fg=AUblue}
+\setbeamercolor{footline}{fg=AUblue}
+\setbeamercolor{header}{fg=AUblue}
+
+\setbeamercovered{still covered={\opaqueness<1>{25}},again covered={\opaqueness<2->{15}}}
+%----------------------------------------------------------
+% 
+%----------------------------------------------------------
+
+% disable navigation symbols (who uses these anyway?)
+\setbeamertemplate{navigation symbols}{}
+
+% frame
+\setbeamertemplate{frametitle}
+{
+	\ifbeamer@plainframe
+	\else
+	\textbf{\insertframetitle}
+	\hspace{-0.25cm}
+	\fi
+ }
+
+%\setbeamertemplate{subsection}{}
+
+% title page with ZBH image
+\setbeamertemplate{title page}{
+  \vbox{}
+  \vfill
+  \begingroup
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor \par 
+      \footnotesize{\authorTitle \par \authorMail}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{insitute}\footnotesize{\instSection \par \department \par \insertinstitute}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\footnotesize{\insertdate}
+    \end{beamercolorbox}\vskip 0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \endgroup
+  \vfill
+}
+
+
+% footer with name, date and page numbers
+\useoutertheme[footline=authortitle]{miniframes}
+\setbeamertemplate{footline}{
+	\ifbeamer@plainframe
+	\else
+	\leavevmode\tiny%
+	\hspace*{3.3cm}
+
+	\ifthenelse{\boolean{@useLogo}}{%
+		\makebox[3.5cm][l]{%
+			\includegraphics[scale=1]{\backgroundfile}
+		}%
+	}%
+
+	\makebox[3cm][l]{\insertauthor}%
+	\makebox[4cm][l]{\footNote}%
+	\hfill\insertframenumber\textbar\inserttotalframenumber\hspace{5mm}%
+	\vspace{3mm}%
+	\fi
+}
+
+\mode
+<all>
+	
